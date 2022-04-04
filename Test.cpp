@@ -1,3 +1,13 @@
+/**
+ * @file Test.cpp
+ * @author Benjamin Saldman
+ * @brief 
+ * @version 0.1
+ * @date 2022-04-04
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <string>
 #include <iostream>
 #include <vector>
@@ -8,20 +18,24 @@
 using namespace zich;
 using namespace std;
 
+/**
+ * @brief check if we don't get a throw on valid input.
+ * 
+ */
 TEST_CASE("Valid Input")
 {
     vector<double> arr = {3, 0, 0, 0, 3, 0, 0, 0, 3};
-    CHECK_NOTHROW(Matrix(arr,3,3));
-    CHECK_NOTHROW(Matrix(arr,9,1));
-    CHECK_NOTHROW(Matrix(arr,1,9));
+    CHECK_NOTHROW(Matrix(arr,3,3)); // valid 3X3 matrix.
+    CHECK_NOTHROW(Matrix(arr,9,1)); // valid 9X1 matrix.
+    CHECK_NOTHROW(Matrix(arr,1,9)); // valid 1X9 matrix.
     Matrix a(arr,3,3);
-    Matrix b(a);
-    CHECK_NOTHROW(+a);
-    CHECK_NOTHROW(-a);
+    Matrix b(a); 
+    CHECK_NOTHROW(+a); // valid + unary on valid matrix.
+    CHECK_NOTHROW(-a); // valid - unaray on valid matrix
     CHECK_NOTHROW(a+b);
     CHECK_NOTHROW(a-b);
     CHECK_NOTHROW(3*a);
-    CHECK_NOTHROW(a*b);
+    CHECK_NOTHROW(a*b); // * is defined because a=b.
     CHECK_NOTHROW(a++);
     CHECK_NOTHROW(a--);
     CHECK_NOTHROW(a+=b);
@@ -31,25 +45,35 @@ TEST_CASE("Valid Input")
     CHECK_EQ(a==b,true);
     CHECK_EQ(a!=b,false);
 }
+/**
+ * @brief check that we get exception on invalid input.
+ * 
+ */
 TEST_CASE("Invalid input")
 {
     vector<double> arr = {3, 0, 0, 0, 3, 0, 0, 0, 3};
     for(int i=1;i<100;i++)
     {
-        CHECK_THROWS(Matrix(arr,i,i+9));
-        CHECK_THROWS(Matrix(arr,-i,-(i+9)));
+        CHECK_THROWS(Matrix(arr,i,i+9)); // Invalid matrix size.
+        CHECK_THROWS(Matrix(arr,-i,-(i+9))); // rows, cols can't be negative.
+        CHECK_THROWS(Matrix(arr,i,-(i+9)));
+        CHECK_THROWS(Matrix(arr,-i,(i+9)));
     }
     CHECK_THROWS(Matrix(arr,-3,-3));
     CHECK_THROWS(Matrix(arr,-9,-1));
     CHECK_THROWS(Matrix(arr,-1,-9));
     Matrix a(arr,3,3);
     Matrix b(arr,9,1);
-    CHECK_THROWS(a+b);
-    CHECK_THROWS(a-b);
-    CHECK_THROWS(a*b);
+    CHECK_THROWS(a+b); // + undefiend when size of a != size of b.
+    CHECK_THROWS(a-b); // - undefiend when size of a != size of b.
+    CHECK_THROWS(a*b); // * undefiend when the columns of a != rows of b.
     CHECK_THROWS(a+=b);
     CHECK_THROWS(a-=b);
 }
+/**
+ * @brief test case that check the validity of the operators.
+ * 
+ */
 TEST_CASE("Testing operators")
 {
     vector<double> arr = {3, 0, 0, 0, 3, 0, 0, 0, 3};
