@@ -22,30 +22,30 @@ namespace zich{
         public:
             Matrix(const vector<double> &vec,int row ,int col);
             Matrix(const Matrix& other);
-            Matrix operator+(const Matrix& other);
-            Matrix operator+();
+            Matrix operator+(const Matrix& other) const;
+            Matrix operator+() const;
             Matrix& operator+=(const Matrix& other);
-            Matrix operator-(const Matrix& other);
-            Matrix operator-();
+            Matrix operator-(const Matrix& other) const;
+            Matrix operator-() const;
             Matrix& operator-=(const Matrix& other);
 
-            bool operator>(const Matrix& other);
-            bool operator>=(const Matrix& other);
-            bool operator<(const Matrix& other);
-            bool operator<=(const Matrix& other);
-            bool operator!=(const Matrix& other);
-            bool operator==(const Matrix& other);
+            bool operator>(const Matrix& other) const;
+            bool operator>=(const Matrix& other) const;
+            bool operator<(const Matrix& other) const;
+            bool operator<=(const Matrix& other) const;
+            bool operator!=(const Matrix& other) const;
+            bool operator==(const Matrix& other) const;
 
             Matrix& operator++();
             Matrix operator++(int);
             Matrix& operator--();
             Matrix operator--(int);
 
-            Matrix operator*(const Matrix& other);
+            Matrix operator*(const Matrix& other) const;
             Matrix& operator*=(double num);
 
             friend std::ostream& operator<<(ostream& output,const Matrix& mat);
             friend std::istream& operator>>(istream& input,Matrix& mat);
-            friend Matrix operator*(double num,Matrix& mat);
+            friend Matrix operator*(double num,Matrix& mat) ;
     };
 };

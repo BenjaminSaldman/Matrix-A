@@ -68,7 +68,7 @@ namespace zich{
      * @param other 
      * @return Matrix 
      */
-    Matrix Matrix::operator+(const Matrix& other){
+    Matrix Matrix::operator+(const Matrix& other) const{
         if(other.col!=col || other.row!=row)
         {
             throw invalid_argument{"Can't add this matrix!"}; // + is undefined if the sizes aren't equal.
@@ -85,7 +85,7 @@ namespace zich{
      * 
      * @return Matrix 
      */
-    Matrix Matrix::operator+(){
+    Matrix Matrix::operator+() const{
         // return a duplicate of the matrix.
         return Matrix(this->mat,this->row,this->col);
     }
@@ -112,7 +112,7 @@ namespace zich{
      * 
      * @return Matrix 
      */
-    Matrix Matrix::operator-(const Matrix& other){
+    Matrix Matrix::operator-(const Matrix& other) const{
         if(other.col!=col || other.row!=row)
         {
             throw invalid_argument{"Can't sub this matrix!"}; // sub is undefined if the sizes aren't equal.
@@ -129,7 +129,7 @@ namespace zich{
      * 
      * @return Matrix 
      */
-    Matrix Matrix::operator-(){
+    Matrix Matrix::operator-() const{
         Matrix ans(this->mat,this->row,this->col);
         // return new matrix with negative values.
         for(unsigned i=0;i<ans.mat.size();i++)
@@ -163,7 +163,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-    bool Matrix::operator>(const Matrix& other)
+    bool Matrix::operator>(const Matrix& other) const
     {
         
         if(other.col!=col || other.row!=row) // check validity of sizes.
@@ -190,7 +190,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-     bool Matrix::operator<(const Matrix& other)
+     bool Matrix::operator<(const Matrix& other) const
     {
         if(other.col!=col || other.row!=row) // check validity of sizes.
         {
@@ -217,7 +217,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-     bool Matrix::operator>=(const Matrix& other)
+     bool Matrix::operator>=(const Matrix& other) const
     {
          if(other.col!=col || other.row!=row) // check validity of sizes.
         {
@@ -233,7 +233,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-     bool Matrix::operator<=(const Matrix& other)
+     bool Matrix::operator<=(const Matrix& other) const
     {
          if(other.col!=col || other.row!=row) // check validity of sizes.
         {
@@ -249,7 +249,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-     bool Matrix::operator==(const Matrix& other)
+     bool Matrix::operator==(const Matrix& other) const
     {
         
         bool ans=true;
@@ -276,7 +276,7 @@ namespace zich{
      * @return true 
      * @return false 
      */
-    bool Matrix::operator!=(const Matrix& other)
+    bool Matrix::operator!=(const Matrix& other) const
     {
          if(other.col!=col || other.row!=row) // check validity of sizes.
         {
@@ -343,7 +343,7 @@ namespace zich{
      * @param other 
      * @return Matrix 
      */
-    Matrix Matrix::operator*(const Matrix& other)
+    Matrix Matrix::operator*(const Matrix& other) const
     {
         if(col!=other.row) // multipication defined when the number of the columns equal to the number of rows.
         {
@@ -399,7 +399,7 @@ namespace zich{
      * @param mat 
      * @return Matrix 
      */
-    Matrix operator*(double num,Matrix& mat)
+    Matrix operator*(double num,Matrix& mat) 
     {
         Matrix m(mat.mat,mat.row,mat.col); // creating a new matrix.
         for(unsigned i=0;i<m.mat.size();i++)
@@ -415,7 +415,7 @@ namespace zich{
      * @param mat 
      * @return std::ostream& 
      */
-    std::ostream& operator<<(ostream& output,const Matrix& mat)
+    std::ostream& operator<<(ostream& output,const Matrix& mat) 
     {
         int temp=0; // check that there is no space between last number to ']'
         unsigned index=0; // current mat index.
@@ -446,7 +446,7 @@ namespace zich{
    * @param mat 
    * @return std::istream& 
    */
-    std::istream& operator>>(istream& input,Matrix& mat)
+    std::istream& operator>>(istream& input,Matrix& mat) 
     {
         vector<double>vec; // Matrix mat.
         char curr=ZERO; // Current character to read.
