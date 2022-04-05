@@ -20,7 +20,7 @@ namespace zich{
         int col;
         vector<double>mat;
         public:
-            Matrix(vector<double>vec,int row ,int col);
+            Matrix(const vector<double> &vec,int row ,int col);
             Matrix(const Matrix& other);
             Matrix operator+(const Matrix& other);
             Matrix operator+();

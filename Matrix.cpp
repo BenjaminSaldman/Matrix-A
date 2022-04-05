@@ -42,7 +42,7 @@ namespace zich{
      * @param row 
      * @param col 
      */
-    Matrix::Matrix(vector<double>vec,int row ,int col)
+    Matrix::Matrix(const vector<double> &vec,int row ,int col)
     {
         if(row<=ZERO || col <=ZERO || vec.size()!=row*col)
         {
@@ -165,6 +165,11 @@ namespace zich{
      */
     bool Matrix::operator>(const Matrix& other)
     {
+        
+        if(other.col!=col || other.row!=row) // check validity of sizes.
+        {
+            throw invalid_argument{"Invalid input"};
+        }
         double sumA=0; // sum of current matrix.
         double sumB=0; // sum of other matrix.
         for(unsigned i=0;i<this->mat.size();i++)
@@ -187,6 +192,10 @@ namespace zich{
      */
      bool Matrix::operator<(const Matrix& other)
     {
+        if(other.col!=col || other.row!=row) // check validity of sizes.
+        {
+            throw invalid_argument{"Invalid input"};
+        }
         double sumA=0; // sum of current matrix.
         double sumB=0; // sum of other matrix.
 
@@ -210,6 +219,10 @@ namespace zich{
      */
      bool Matrix::operator>=(const Matrix& other)
     {
+         if(other.col!=col || other.row!=row) // check validity of sizes.
+        {
+            throw invalid_argument{"Invalid input"};
+        }
       
         return (*this>other) || (*this == other);
     }
@@ -222,6 +235,10 @@ namespace zich{
      */
      bool Matrix::operator<=(const Matrix& other)
     {
+         if(other.col!=col || other.row!=row) // check validity of sizes.
+        {
+            throw invalid_argument{"Invalid input"};
+        }
         
         return (*this<other) || (*this == other);
     }
@@ -236,20 +253,20 @@ namespace zich{
     {
         
         bool ans=true;
-        if(other.col !=col || other.row!=row) // if the columns or the rows aren't equal then they can't contain the same values.
+        if(other.col!=col || other.row!=row) // check validity of sizes.
         {
-            ans=false;
+            throw invalid_argument{"Invalid input"};
         }
-        else{
-            for(unsigned i=0;i<this->mat.size();i++)
+        
+        for(unsigned i=0;i<this->mat.size();i++)
+        {
+            if(mat.at(i)!=other.mat.at(i)) // check if the two matrix are the same.
             {
-                if(mat.at(i)!=other.mat.at(i)) // check if the two matrix are the same.
-                {
-                    ans=false;
-                    break;
-                }
+                ans=false;
+                break;
             }
         }
+        
         return ans;
     }
     /**
@@ -261,6 +278,10 @@ namespace zich{
      */
     bool Matrix::operator!=(const Matrix& other)
     {
+         if(other.col!=col || other.row!=row) // check validity of sizes.
+        {
+            throw invalid_argument{"Invalid input"};
+        }
 
         return !(*this==other);
     }

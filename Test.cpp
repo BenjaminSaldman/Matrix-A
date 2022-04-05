@@ -64,11 +64,21 @@ TEST_CASE("Invalid input")
     CHECK_THROWS(Matrix(arr,-1,-9));
     Matrix a(arr,3,3);
     Matrix b(arr,9,1);
+    /**
+     * @brief undefiend boolean operations.
+     * 
+     */
     CHECK_THROWS(a+b); // + undefiend when size of a != size of b.
     CHECK_THROWS(a-b); // - undefiend when size of a != size of b.
     CHECK_THROWS(a*b); // * undefiend when the columns of a != rows of b.
     CHECK_THROWS(a+=b);
     CHECK_THROWS(a-=b);
+    CHECK_THROWS(bool temp=a>b);
+    CHECK_THROWS(bool temp=a>=b);
+    CHECK_THROWS(bool temp=a<b);
+    CHECK_THROWS(bool temp=a<=b);
+    CHECK_THROWS(bool temp=a==b);
+    CHECK_THROWS(bool temp=a!=b);
 }
 /**
  * @brief test case that check the validity of the operators.
@@ -99,14 +109,6 @@ TEST_CASE("Testing operators")
     CHECK_EQ(a!=a,false);
     CHECK_EQ(a<a,false);
     CHECK_EQ(a>a,false);
-    CHECK_EQ(c*d>a,true);
-    CHECK_EQ(c*d>=a,true);
-    CHECK_EQ(c*d!=a,true);
-    CHECK_EQ(c*d==a,false);
-    arr={10,4,4,4,10,4,4,4,10};
-    CHECK_EQ(2*a==Matrix(arr,3,3),true);
-    CHECK_EQ(2*a==Matrix(arr,9,1),false);
-    CHECK_EQ(2*a==Matrix(arr,1,9),false);
     arr = {3, 0, 0, 0, 3, 0, 0, 0, 3};
     Matrix a1(arr,3,3);
     Matrix b1(arr,3,3);
