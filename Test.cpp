@@ -116,6 +116,14 @@ TEST_CASE("Testing operators")
     CHECK_EQ(2*a1+b1==Matrix(arr,3,3),true);
     arr={10,1,1,1,10,1,1,1,10};
     CHECK_EQ(++(2*a1)+b1==Matrix(arr,3,3),true);
+    arr = {3, 0, 0, 0, 3, 0, 0, 0, 3};
+    Matrix a2(arr,3,3);
+    arr = {9, 0, 0, 0, 0, 0, 0, 0, 0};
+    Matrix b2(arr,3,3);
+    CHECK_EQ(a2>=b2,true);
+    CHECK_EQ(a2>b2,false);
+    CHECK_EQ(a2<b2,false);
+    CHECK_EQ(a2==b2,false);
 
 
 }

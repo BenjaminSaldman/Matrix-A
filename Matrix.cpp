@@ -223,8 +223,19 @@ namespace zich{
         {
             throw invalid_argument{"Invalid input"};
         }
+        double sumA=0; // sum of current matrix.
+        double sumB=0; // sum of other matrix.
+
+        for(unsigned i=0;i<this->mat.size();i++)
+        {
+            sumA+=this->mat.at(i);
+        }
+        for(unsigned i=0;i<other.mat.size();i++)
+        {
+            sumB+=other.mat.at(i);
+        }
       
-        return (*this>other) || (*this == other);
+        return (*this>other) || (sumA==sumB);
     }
     /**
      * @brief overload operator <=.
@@ -239,8 +250,18 @@ namespace zich{
         {
             throw invalid_argument{"Invalid input"};
         }
-        
-        return (*this<other) || (*this == other);
+        double sumA=0; // sum of current matrix.
+        double sumB=0; // sum of other matrix.
+
+        for(unsigned i=0;i<this->mat.size();i++)
+        {
+            sumA+=this->mat.at(i);
+        }
+        for(unsigned i=0;i<other.mat.size();i++)
+        {
+            sumB+=other.mat.at(i);
+        }
+        return (*this<other) || (sumA == sumB);
     }
     /**
      * @brief overload operator ==.
